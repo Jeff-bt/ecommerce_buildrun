@@ -5,8 +5,10 @@ import dev.jeff.ecommerce.controller.dto.CreateUserDto;
 import dev.jeff.ecommerce.entity.UserEntity;
 import dev.jeff.ecommerce.repository.BillingAddressRepository;
 import dev.jeff.ecommerce.repository.UserRepository;
-import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UserService {
@@ -25,5 +27,19 @@ public class UserService {
         user.setFullName(body.fullName());
         user.setBillingAddress(CreateBillingAddressDto.toEntity(body.billingAddress()));
         return userRepository.save(user);
+    }
+
+    public Optional<UserEntity> findById(UUID usersId) {
+        return userRepository.findById(usersId);
+    }
+
+    public boolean delete(UUID usersId) {
+        Optional<UserEntity> user = userRepository.findById(usersId);
+        if (user.isPresent()) {
+            userRepository.deleteById(usersId);
+            return true;
+        }
+
+        return false;
     }
 }
