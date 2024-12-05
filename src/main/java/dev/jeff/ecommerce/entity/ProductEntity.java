@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Data
@@ -22,4 +23,13 @@ public class ProductEntity {
 
     @Column(name = "price")
     private BigDecimal price;
+
+    @ManyToMany()
+    @JoinTable(
+            name = "tb_product_tag",
+            uniqueConstraints = @UniqueConstraint(columnNames = {"product_id", "tag_id"}),
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id")
+    )
+    private List<TagEntity> tags;
 }
