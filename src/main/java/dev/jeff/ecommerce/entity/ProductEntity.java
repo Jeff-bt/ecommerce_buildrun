@@ -10,7 +10,7 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name = "tb_product")
+@Table(name = "tb_products")
 public class ProductEntity {
 
     @Id
@@ -26,7 +26,7 @@ public class ProductEntity {
 
     @ManyToMany()
     @JoinTable(
-            name = "tb_product_tag",
+            name = "tb_products_tags",
             uniqueConstraints = @UniqueConstraint(columnNames = {"product_id", "tag_id"}),
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id")
