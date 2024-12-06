@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OrderService {
@@ -100,5 +101,9 @@ public class OrderService {
         }
 
         return PageRequest.of(page, pageSize, direction, "orderDate");
+    }
+
+    public Optional<OrderEntity> findbyId(Long orderId) {
+        return orderRepository.findById(orderId);
     }
 }
