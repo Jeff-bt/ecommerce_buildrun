@@ -2,11 +2,15 @@ package dev.jeff.ecommerce.service;
 
 import dev.jeff.ecommerce.controller.dto.CreateOrderDto;
 import dev.jeff.ecommerce.controller.dto.OrderItemDto;
+import dev.jeff.ecommerce.controller.dto.OrderSummaryDto;
 import dev.jeff.ecommerce.entity.*;
 import dev.jeff.ecommerce.exception.CreateOrderException;
 import dev.jeff.ecommerce.repository.OrderRepository;
 import dev.jeff.ecommerce.repository.ProductRepository;
 import dev.jeff.ecommerce.repository.UserRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -80,5 +84,21 @@ public class OrderService {
                 .map(item -> item.getSalePrice().multiply(BigDecimal.valueOf(item.getQuantity())))
                 .reduce(BigDecimal::add)
                 .orElse(BigDecimal.ZERO);
+    }
+
+    public Page<OrderSummaryDto> findAll(Integer page, Integer pageSize, String orderBy) {
+        PageRequest pageRequest = getPageRequest(page, pageSize, orderBy);
+        Page<OrderEntity> orders = orderRepository.findAll(pageRequest);
+
+        return orders.map(order -> OrderSummaryDto.fromEntity(order));
+    }
+
+    private PageRequest getPageRequest(Integer page, Integer pageSize, String orderBy) {
+        Direction direction = Direction.DESC;
+        if (orderBy.equalsIgnoreCase("asc")) {
+            direction = Direction.ASC;
+        }
+
+        return PageRequest.of(page, pageSize, direction, "orderDate");
     }
 }
