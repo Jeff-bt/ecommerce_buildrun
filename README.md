@@ -1,5 +1,5 @@
 # E-commerce🛒
-Uma api de e-commerce que permite gerenciar usuários, cadatrar seus pedidos, lista todos os seus pedidos e mostra um pedido com todo o detalhamento.
+Uma api de e-commerce que permite gerenciar usuários, cadatrar seus pedidos, listar todos os seus pedidos e mostrar um pedido com todo o detalhamento.
 
 
 ### Propósito (Estudo)
@@ -20,7 +20,7 @@ Também apliquei diferentes estratégias de Cascade e otimização de carregamen
 
 ## Template
 
-![testes](https://github.com/Jeff-bt/livechatms/blob/main/weebSocket_layout.png)
+![projeto](https://github.com/Jeff-bt/ecommerce_buildrun/blob/main/images/projeto.png)
 
 ## Como iniciar o projeto
 
@@ -28,6 +28,7 @@ Também apliquei diferentes estratégias de Cascade e otimização de carregamen
   - Java 17
   - Git
   - Docker
+  - Postman
 
 ### Clona
 
@@ -68,5 +69,9 @@ Também apliquei diferentes estratégias de Cascade e otimização de carregamen
 
 ## Testando aplicação
 
-- Abra o navegador com a url: `http://localhost:5000/`
+- Abra o Postman
+- Clique em import:    
+  ![projeto](https://github.com/Jeff-bt/ecommerce_buildrun/blob/main/images/import_collection_parte_1.png)
+- E coloque o arquivo `E-commerce.postman_collection.json` que se encontra dentro da pasta raiz do projeto.
+- Agora basta testar as APIs na pasta E-commerce do postman.
 
